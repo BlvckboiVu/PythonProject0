@@ -1,4 +1,4 @@
-import re
+ import re
 password = input("Enter password: ")
 
 has_uppercase = False
@@ -23,7 +23,7 @@ import re
 
 def check_password_strength(password):
     """
-    Function to check the strength of a password.
+    Function to check the strength of the password.
 
     Password must be over 8 characters and must contain alphanumeric, upper and lowercase characters.
 
