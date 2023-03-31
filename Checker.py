@@ -1,4 +1,3 @@
-import re
 password = input("Enter password: ")
 
 has_uppercase = False
@@ -29,3 +28,13 @@ def check_password_strength(password):
 
     Args:
         password (str): The password to be checked.
+Returns:
+        int: 0 if password is weak, 1 if password is moderate, 2 if password is strong.
+    """
+    # Initialize strength score to 0
+    strength = 0
+
+    # Check password length
+    if len(password) < 8:
+        print("Password is weak. It must be at least 8 characters long.")
+        return strength
