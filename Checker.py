@@ -1,3 +1,4 @@
+import re
 password = input("Enter password: ")
 
 has_uppercase = False
