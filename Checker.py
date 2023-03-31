@@ -38,3 +38,20 @@ Returns:
     if len(password) < 8:
         print("Password is weak. It must be at least 8 characters long.")
         return strength
+
+   # Check for alphanumeric characters
+    if not re.search(r'\d', password) or not re.search(r'[a-zA-Z]', password):
+        print("Password is weak. It must contain alphanumeric characters.")
+        return strength
+
+    # Check for uppercase and lowercase characters
+    if not re.search(r'[A-Z]', password) or not re.search(r'[a-z]', password):
+        print("Password is moderate. It should contain both uppercase and lowercase characters.")
+        strength = 1
+    else:
+        strength = 2
+
+    # Return strength score
+    return strength
+
+# Keep asking for password until a strong password is entered
