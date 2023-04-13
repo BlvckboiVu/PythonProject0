@@ -1,31 +1,27 @@
 import re
-   # Function to check password strength 
+
 def check_password_strength(password):
-    strength = 0
-   # To check length of password is > 8
+   # To check if the length of the passwors is less than 8
     if len(password) < 8:
-        print("Password is weak. It must be at least 8 characters long.")
-        return strength
-   # To check password has numeric characters
-    if not re.search('[0-9]', password):
-        print("Password is weak. It must contain numeric characters.")
-        return strength
-   # To check password for lower and uppercase characters
-    if not re.search('[A-Z]', password) or not re.search('[a-z]', password):
-        print("Password is moderate. It should contain both uppercase and lowercase characters.")
-        strength = 1
+        return 'Password is too short'
+   # To check if it has numerical characters
+    elif not any(char.isdigit() for char in password):      
+        return 'Password should have at least one numeral'
+   # To chack if it has Uppercase characters
+    elif not any(char.isupper() for char in password):
+        return 'Password should have at least one uppercase letter'
+   # To check if it has lowercase characters
+    elif not any(char.islower() for char in password):
+        return 'Password should have at least one lowercase letter'
+   # To check if it has special characters
+    elif not any(char in '@_!#$%^&*()<>?/\\|}{~:' for char in password):
+        return 'Password should have at least one special character'
     else:
-        strength = 2
-
-    # Return strength score
-    return strength
-
+        return 'Password is strong'
+# The loop makes it so that it asks for input again if the password is not strong enough
 while True:
-    password = input("Enter password: ")
-    strength = check_password_strength(password)
-
-    if strength == 2:
-        print("Password is strong!")
+    password = input('Enter a password: ')
+    result = check_password_strength(password)
+    print(result)
+    if result == 'Password is strong':
         break
-    # If password is not strong enough 
-    print("Try again!")
