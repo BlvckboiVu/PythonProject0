@@ -1,31 +1,42 @@
-import re
-   # Function to check password strength 
+import tkinter as tk
+
 def check_password_strength(password):
-    strength = 0
-   # To check length of password is > 8
     if len(password) < 8:
-        print("Password is weak. It must be at least 8 characters long.")
-        return strength
-   # To check password has numeric characters
-    if not re.search('[0-9]', password):
-        print("Password is weak. It must contain numeric characters.")
-        return strength
-   # To check password for lower and uppercase characters
-    if not re.search('[A-Z]', password) or not re.search('[a-z]', password):
-        print("Password is moderate. It should contain both uppercase and lowercase characters.")
-        strength = 1
+        return 'Password is too short'
+    elif not any(char.isdigit() for char in password):
+        return 'Password should have at least one numeral'
+    elif not any(char.isupper() for char in password):
+        return 'Password should have at least one uppercase letter'
+    elif not any(char.islower() for char in password):
+        return 'Password should have at least one lowercase letter'
+    elif not any(char in '@_!#$%^&*()<>?/\\|}{~:' for char in password):
+        return 'Password should have at least one special character'
     else:
-        strength = 2
+        return 'Password is strong'
 
-    # Return strength score
-    return strength
+def check_password():
+    password = entry.get()
+    result = check_password_strength(password)
+    result_label.config(text=result)
 
-while True:
-    password = input("Enter password: ")
-    strength = check_password_strength(password)
+window = tk.Tk()
+window.title("Password Checker")
+window.geometry("400x200")
+window.config(bg="#1E90FF")
 
-    if strength == 2:
-        print("Password is strong!")
-        break
-    # If password is not strong enough 
-    print("Try again!")
+# Create password entry box
+label = tk.Label(text="Enter Password:", bg="#1e91ff", fg="white")
+label.pack(padx=5, pady=8)
+entry = tk.Entry(width=30, show="")
+entry.pack(padx=5, pady=8)
+
+# Create check button
+check_button = tk.Button(text="Check Password", command=check_password, bg="#ffd700", fg="black")
+check_button.pack(padx=5, pady=7)
+
+# Create result label
+result_label = tk.Label(text="", bg="#1e91ff", fg="white")
+result_label.pack(padx=5, pady=25, side=tk.BOTTOM)
+
+# Run tkinter window
+window.mainloop()
