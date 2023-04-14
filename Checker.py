@@ -18,7 +18,14 @@ def check_password():
     password = entry.get()
     result = check_password_strength(password)
     result_label.config(text=result)
-
+    
+def toggle_password_visibility():
+    show_password = show_password_var.get()
+    if show_password:
+        entry.configure(show="")
+    else:
+        entry.configure(show="*")
+       
 window = tk.Tk()
 window.title("Password Checker")
 window.geometry("400x200")
@@ -37,6 +44,14 @@ check_button.pack(padx=5, pady=7)
 # Create result label
 result_label = tk.Label(text="", bg="#1e91ff", fg="white")
 result_label.pack(padx=5, pady=25, side=tk.BOTTOM)
+
+# Create a variable to store the password visibility state
+show_password_var = tk.BooleanVar()
+show_password_var.set(True)
+
+# Create a checkbox to toggle password visibility
+show_password_checkbox = tk.Checkbutton(window, text="Show Password", variable=show_password_var, command=toggle_password_visibility)
+show_password_checkbox.pack(padx=10, pady=5)
 
 # Run tkinter window
 window.mainloop()
